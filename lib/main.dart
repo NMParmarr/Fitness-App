@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:workout_fitness/app.dart';
+import 'package:workout_fitness/common/common_toast.dart';
 
 // import 'package:workout_fitness/view/login/on_boarding_view.dart';
 import 'package:workout_fitness/view/menu/menu_view.dart';
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Workout Fitness',
+      navigatorKey: rootNavigatorKey,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         fontFamily: "Quicksand",

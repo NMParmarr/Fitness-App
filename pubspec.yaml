@@ -41,9 +41,12 @@ dependencies:
   flutter_rating_bar: ^4.0.1
   flutter_calendar_carousel: ^2.4.2
   simple_circular_progress_bar: ^1.0.2
-  firebase_auth:
-  firebase_core:
-  firebase_cloud_firestore:
+  firebase_auth: ^5.3.1
+  shared_preferences:
+  firebase_core: ^3.6.0
+  cloud_firestore: ^5.4.4
+  fluttertoast:
+  provider:
 
 
 dev_dependencies:

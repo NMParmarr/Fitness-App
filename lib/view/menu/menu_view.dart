@@ -1,16 +1,19 @@
 import 'dart:ui';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:workout_fitness/common/common_toast.dart';
+import 'package:workout_fitness/common/loader.dart';
+import 'package:workout_fitness/common_widget/round_button.dart';
 import 'package:workout_fitness/view/home/home_view.dart';
-import 'package:workout_fitness/view/meal_plan/meal_plan_view.dart';
+import 'package:workout_fitness/view/login/login_screen.dart';
 import 'package:workout_fitness/view/menu/yoga_view.dart';
 import 'package:workout_fitness/view/settings/setting_view.dart';
 
 import '../../common/color_extension.dart';
 import '../../common_widget/menu_cell.dart';
 import '../../common_widget/plan_row.dart';
-import '../exercise/exercise_view.dart';
 import '../exercise/exercise_view_2.dart';
 import '../meal_plan/meal_plan_view_2.dart';
 import '../running/running_view.dart';
@@ -170,25 +173,55 @@ class _MenuViewState extends State<MenuView> {
                         const SizedBox(
                           height: 15,
                         ),
-                        Container(
-                          height: kTextTabBarHeight,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                "Switch Account",
-                                style: TextStyle(
-                                    fontSize: 18,
-                                    color: TColor.secondaryText,
-                                    fontWeight: FontWeight.w700),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(right: 20),
-                                child: Image.asset("assets/img/next.png",
-                                    width: 18, height: 18),
-                              )
-                            ],
+                        InkWell(
+                          onTap: () {
+                            showDialog(
+                              context: context,
+                              builder: (ctx) {
+                                return AlertDialog(
+                                  title: Text("Logout.!"),
+                                  content: Text("Are you sure to logout ?"),
+                                  actions: [
+                                    OutlinedButton(onPressed: () => Navigator.pop(ctx), child: Text("NO")),
+                                    ElevatedButton(
+                                        onPressed: () async {
+                                          Navigator.pop(ctx);
+                                          showLoader(context);
+                                          bool success = false;
+                                          try {
+                                            await FirebaseAuth.instance.signOut();
+                                            success = true;
+                                          } catch (e) {
+                                            showSnackbar("Something went wrong.!");
+                                          }
+                                          hideLoader();
+                                          if(success) Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_) => LoginScreen()), (_) => false);
+                                        },
+                                        child: Text("YES")),
+                                  ],
+                                );
+                              },
+                            );
+                          },
+                          child: Container(
+                            height: kTextTabBarHeight,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  "Logout",
+                                  style: TextStyle(fontSize: 18, color: TColor.secondaryText, fontWeight: FontWeight.w700),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 20),
+                                  child: Icon(Icons.logout),
+                                )
+                              ],
+                            ),
                           ),
+                        ),
+                        const SizedBox(
+                          height: 15,
                         ),
                       ],
                     ),

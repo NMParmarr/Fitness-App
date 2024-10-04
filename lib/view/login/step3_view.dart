@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:workout_fitness/common/common_toast.dart';
+import 'package:workout_fitness/view/login/login_screen.dart';
 
 import '../../common/color_extension.dart';
 import '../../common_widget/round_button.dart';
@@ -16,9 +18,9 @@ class Step3View extends StatefulWidget {
 
 class _Step3ViewState extends State<Step3View> {
   bool isAppleHealth = true;
-  DateTime? selectDate;
-  String? selectHeight;
-  String? selectWeight;
+  DateTime? selectDate = DateTime.now();
+  String? selectHeight = "167 cm";
+  String? selectWeight = "54 kg";
   bool isMale = true;
 
   @override
@@ -209,7 +211,24 @@ class _Step3ViewState extends State<Step3View> {
                 child: RoundButton(
                   title: "Start",
                   onPressed: () {
-                    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => const MenuView() ) , (route) => false);
+                    if(selectDate == null) {
+                      showSnackbar("Please select birthdate");
+                      return;
+                    }
+                    if(selectHeight == null) {
+                      showSnackbar("Please select height");
+                      return;
+                    }
+                    if(selectWeight == null) {
+                      showSnackbar("Please select weight");
+                      return;
+                    }
+                    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => LoginScreen(
+                      birthDate: selectDate!,
+                      height: selectHeight!,
+                      weight: selectWeight!,
+                      gender: isMale ? "Male" : "Female",
+                    ) ) , (route) => false);
                   },
                 ),
               ),
