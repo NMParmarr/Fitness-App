@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "107866913357",
+    "project_id": "my-workout-fitness",
+    "storage_bucket": "my-workout-fitness.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:107866913357:android:e7c63e32d558db2c0e7a04",
+        "android_client_info": {
+          "package_name": "com.codeforany.workout_fitness"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_Gf40x_hBBICnA1TpHRbESOjkw2rZCyU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
