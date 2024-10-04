@@ -43,6 +43,7 @@ dependencies:
   simple_circular_progress_bar: ^1.0.2
   firebase_auth:
   firebase_core:
+  firebase_cloud_firestore:
 
 
 dev_dependencies:
